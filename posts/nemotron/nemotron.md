@@ -12,32 +12,25 @@ import Image from '#lib/components/image.svelte'
 import YouTube from '#lib/components/youtube.svelte' 
 </script>
 
-<Image src="nemotron3.webp" alt="Picture of Nemontron 3 Ultra logo." />
+<Image src="nemotron3.webp" title="Can't wait to start playing with this model!" alt="Picture of Nemotron 3 Ultra logo." />
+
+Today's AI models (Large Language Models or LLMs) are getting better and better. Nvidia's Nemotron 3 Ultra LLM emerges as the latest proof point. Here we show you how you can gain access to this model without worrying about paying for it. Yes, you are limited in usage but this lowering of the cost of access seems to be the beginning of a trend. Remember when texting was priced by the text?
+
+The instructions to setup your own Nemotron 3 instance follow.
 
 ## Nvidia
 
-1. Create an Nvidia account and login
-
+1. Create an Nvidia account and login.
 1. Go to https://build.nvidia.com
-
-1. You will be asked to create an Nvidia cloud account - pick a name and continue
-
-1. You will be asked to enter your phone number so that you will get a one-time verification password
-
+1. You will be asked to create an Nvidia cloud account - pick a name and continue.
+1. You will be asked to enter your phone number so that you will get a one-time verification password.
 1. You should be ready to search for the Nemotron model. Find the model, and click on it; for example:
-
 <Image src="nemotron3-search.webp" alt="Picture of Nemontron 3 Ultra model." />
-
-1. Notice the free API endpoint.
-
+1. Notice the description that this is a free API endpoint .
 <Image src="nemotron3-model.webp" alt="Picture of Nemontron 3 Ultra logo." />
-
-1. Generate a key by clicking the Generate API Key button: (mine appeared in the python code)
-
+1. Generate a key by clicking the Generate API Key button: 
 <Image src="nemotron3-generate.webp" alt="Picture of Generate API button." />
-
-1. Here is a code snippet:
-
+1. My key appeared in the python code. Here is my code snippet:
 ```bash
 client = OpenAI(
   base_url = "https://integrate.api.nvidia.com/v1",
@@ -45,39 +38,29 @@ client = OpenAI(
 )
 ```
 
-1. Save your API key somewhere safe otherwise you will have to generate a new one.
-
+9. Save your API key somewhere safe otherwise you will have to generate a new one.
 
 ## Opencode
-
-9 - Install opencode terminal (or TUI), I used brew:
-
+1. Install opencode terminal (or TUI), I used brew:
 ```bash
 brew install anomalyco/tap/opencode
 ```
-
-1. Launch opencode
-
+2. Launch opencode
 ```bash
 opencode
 ```
-
-1. Enter `/connect`
-
-
-1. Then find Nvidia and select it
-
+3. Enter `/connect`
 <Image src="nemotron3-connect.webp" alt="Picture of how to invoke the provider menu to connect." />
-1. Enter your key
-
-<Image src="nemotron3-apikey.webp" alt="Picture of an obfuscated API key." />
-
+1. Then find Nvidia and select it.
 <Image src="nemotron3-provider.webp" alt="Picture of Nemontron 3 Ultra logo." />
-
+1. Find the Nemontron 3 Ultra entry and select it.
 <Image src="nemotron3-selectultra.webp" alt="Picture of Nemontron 3 Ultra logo." />
-
-And now you have access to a coding model for free. Unfortunately there are limiters in place which will vary over time, I'm sure.
+1. Enter your key.
+<Image src="nemotron3-apikey.webp" alt="Picture of an obfuscated API key." />
+Boom! 💥 You have access to a coding model for free using `opencode`. Unfortunately there are limiters in place which will vary in duration over time, I'm sure but for curious use and medium strength tasking, this may suffice!
 
 <Image src="nemotron3-meaningoflife.webp" alt="Picture of Nemontron 3 Ultra logo." />
 
-Note: Hit Control-C to get out of `opencode`.
+Note: Hit Control-C to exit `opencode`.
+
+And that's all there is to it. You now have an extremely powerful LLM at your fingertips. 
