@@ -138,12 +138,26 @@
 		cursor: pointer;
 		border-radius: 4px;
 		border: 1px solid #ccc;
-		background: #fff;
-		transition: background 0.2s;
+		background: var(--color-card);
+		color: var(--color-fg);
+		transition:
+			background 0.3s ease,
+			color 0.3s ease,
+			border-color 0.3s ease,
+			box-shadow 0.3s ease;
 	}
-	.load-more-btn:hover {
+	.load-more-btn:is(:hover, :focus-visible) {
+		background: var(--glow);
+		border-color: var(--glow);
+		color: var(--glow-text);
+		box-shadow:
+			0 0 12px var(--glow),
+			0 0 28px var(--glow);
+	}
+
+	/* .load-more-btn:hover {
 		background: #f5f5f5;
-	}
+	} */
 
 	.posts {
 		--chrome: 10rem; /* header + top padding + main's py-8; tweak to taste */
@@ -232,13 +246,56 @@
 		color: var(--color-fg); /* title, readable on --color-card in both themes */
 		text-decoration: none;
 	}
-	.post a:hover {
+	/* .post a:hover {
 		color: var(--color-primary);
-	}
+	} */
 
 	.date,
 	.description {
 		color: var(--color-card-fg); /* .date was var(--text-2) */
+	}
+
+	/* .post {
+		--glow: #007cf0; /* light mode: strong, saturated color */
+	/* } */
+
+	/* :global(.dark) .post { 
+		--glow: #00dfd8;*/ /* dark mode: the cyan you had */
+	/* } */
+
+	section {
+		--glow: #007cf0; /* light mode */
+		--glow-text: #fff;
+	}
+
+	:global(.dark) section {
+		--glow: #00dfd8; /* dark mode */
+		--glow-text: hsl(220 7% 14%);
+	}
+	.title {
+		transition: text-shadow 0.3s ease;
+	}
+
+	.post:is(:hover, :focus-within) .title,
+	.load-more-btn:is(:hover, :focus-visible) {
+		text-shadow:
+			0 0 2px var(--glow),
+			0 0 8px var(--glow),
+			0 0 16px var(--glow);
+	}
+
+	:global(.dark) .post:is(:hover, :focus-within) .title,
+	:global(.dark) .load-more-btn:is(:hover, :focus-visible) {
+		text-shadow:
+			0 0 4px currentColor,
+			0 0 10px var(--glow),
+			0 0 20px var(--glow),
+			0 0 40px var(--glow);
+	}
+	/* the date and description live inside the <a class="title">, so they inherit its glow; this cancels that */
+	.date,
+	.description {
+		text-shadow: none;
 	}
 	.post:before {
 		content: '';
