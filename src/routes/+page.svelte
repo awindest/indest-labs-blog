@@ -270,10 +270,7 @@
 		left: 0;
 		top: 0;
 	}
-	/* 
-	.post:not(:last-child) {
-		padding-bottom: 2rem;
-	} */
+
 	.post .shimmer {
 		background: linear-gradient(
 			112deg,
@@ -294,9 +291,9 @@
 		animation-delay: var(--delay);
 	}
 	/* add this for those people who don't want animations */
-	@media (prefers-reduced-motion: no-preference) {
+	/* @media (prefers-reduced-motion: no-preference) {
 		animation: fade-in 0.5s ease-out;
-	}
+	} */
 	@keyframes slide-in-right {
 		0% {
 			transform: translateX(-100%);
