@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="color-scheme" content="dark light" />
+	<meta name="theme-color" media="(prefers-color-scheme: light)" content="#fafafa" />
+	<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#182030" />
+	<link rel="icon" href="%sveltekit.assets%/assets/flask.svg" />
+	<!-- <link rel="icon" href="%sveltekit.assets%/assets/favicon.ico" /> -->
+	<link rel="manifest" href="%sveltekit.assets%/manifest.json" />
+	<link rel="alternate" type="application/atom+xml" href="%sveltekit.assets%/rss.xml" />
+	<script>
+		try {
+			let html = document.documentElement
+			let theme = localStorage.theme
+
+			// one-time migration from emoji themes to light/dark
+			let darkThemes = [
+				'🌛 Night',
+				'🐺 Night Howl',
+				'🧠 Night Mind',
+				'🌙 Dusk',
+			]
+			let lightThemes = ['☀️ Daylight', '☀️ Light']
+
+			if (darkThemes.includes(theme)) {
+				theme = localStorage.theme = 'dark'
+			} else if (lightThemes.includes(theme)) {
+				theme = localStorage.theme = 'light'
+			}
+
+			let dark =
+				theme === 'dark' ||
+				(!theme && matchMedia('(prefers-color-scheme: dark)').matches)
+			html.classList.toggle('dark', dark)
+
+			if (localStorage.font) html.dataset.font = 'dyslexic'
+			if (localStorage.textSize)
+				html.style.setProperty('--post-txt-size', localStorage.textSize)
+			if (localStorage.textLength)
+				html.style.setProperty('--post-txt-length', localStorage.textLength)
+			if (localStorage.textHeight)
+				html.style.setProperty('--post-txt-height', localStorage.textHeight)
+		} catch { }
+	</script>
+	%sveltekit.head%
+</head>
+
+<body data-sveltekit-preload-data="hover">
+	<div style="display: contents">%sveltekit.body%</div>
+</body>
+
+</html>

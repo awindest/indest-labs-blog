@@ -1,0 +1,14 @@
+{
+	"redirects": [
+		{
+			"source": "/invite",
+			"destination": "https://discord.com",
+			"permanent": true
+		},
+		{
+			"source": "/uses",
+			"destination": "https://github.com/awindest/uses",
+			"permanent": true
+		}
+	]
+}

@@ -1,0 +1,83 @@
+@font-face {
+	font-family: 'Atkinson Hyperlegible';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('/fonts/atkinson-hyperlegible/atkinson-hyperlegible-400.woff2')
+		format('woff2');
+}
+
+@font-face {
+	font-family: 'Atkinson Hyperlegible';
+	font-style: italic;
+	font-weight: 400;
+	font-display: swap;
+	src: url('/fonts/atkinson-hyperlegible/atkinson-hyperlegible-400i.woff2')
+		format('woff2');
+}
+
+@font-face {
+	font-family: 'Atkinson Hyperlegible';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('/fonts/atkinson-hyperlegible/atkinson-hyperlegible-700.woff2')
+		format('woff2');
+}
+
+@font-face {
+	font-family: 'Atkinson Hyperlegible';
+	font-style: italic;
+	font-weight: 700;
+	font-display: swap;
+	src: url('/fonts/atkinson-hyperlegible/atkinson-hyperlegible-700i.woff2')
+		format('woff2');
+}
+
+@font-face {
+	font-family: 'DM Serif';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('/fonts/dm-serif/dm-serif-400.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'JetBrains Mono';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('/fonts/jetbrains-mono/jetbrains-mono-400.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'JetBrains Mono';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('/fonts/jetbrains-mono/jetbrains-mono-700.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'OpenDyslexic';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('/fonts/openDyslexic/openDyslexic-400.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'OpenDyslexic Mono';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('/fonts/openDyslexic/openDyslexic-700.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'OpenDyslexic';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('/fonts/openDyslexic/openDyslexicMono-400.woff2') format('woff2');
+}
