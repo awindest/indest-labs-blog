@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DAMA-DMBOK Neon Wheel — Interactive Image Map</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --cyan: #35eaff;
+      --blue: #1688ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: clamp(16px, 3vw, 36px);
+      color: #eaf7ff;
+      font: 16px/1.5 system-ui, -apple-system, Segoe UI, sans-serif;
+      background: radial-gradient(ellipse at 50% 35%, #092c67 0%, #04132f 50%, #020713 100%);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      letter-spacing: .02em;
+    }
+
+    .intro {
+      margin: 0 0 22px;
+      color: #a9d7ff;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(250px, .8fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .wheel {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 0 28px #087dff55;
+    }
+
+    .wheel img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .wheel svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .segment,
+    .hub {
+      fill: #00d9ff;
+      fill-opacity: 0;
+      stroke: transparent;
+      stroke-width: 3;
+      cursor: pointer;
+      pointer-events: all;
+      transition: fill-opacity .16s ease, stroke .16s ease;
+      outline: none;
+    }
+
+    .segment:hover,
+    .segment:focus,
+    .segment.active,
+    .hub:hover,
+    .hub:focus,
+    .hub.active {
+      fill-opacity: .18;
+      stroke: #74f7ff;
+      filter: drop-shadow(0 0 8px #00cfff);
+    }
+
+    aside {
+      padding: 22px;
+      border: 1px solid #1a8bff88;
+      border-radius: 18px;
+      background: #061632d9;
+      box-shadow: inset 0 0 24px #087dff18;
+      position: sticky;
+      top: 20px;
+    }
+
+    .eyebrow {
+      color: #53dfff;
+      text-transform: uppercase;
+      font-size: .75rem;
+      letter-spacing: .15em;
+      font-weight: 700;
+    }
+
+    #domain-title {
+      margin: 8px 0 10px;
+      font-size: clamp(1.2rem, 2vw, 1.65rem);
+      line-height: 1.2;
+    }
+
+    #domain-description {
+      color: #c4dff7;
+    }
+
+    .hint {
+      margin-top: 22px;
+      color: #8db7df;
+      font-size: .88rem;
+    }
+
+    .domain-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .domain-list button {
+      text-align: left;
+      color: #c9eaff;
+      background: #071d3c;
+      border: 1px solid #15569b;
+      border-radius: 9px;
+      padding: 9px 10px;
+      cursor: pointer;
+      font: inherit;
+      font-size: .83rem;
+    }
+
+    .domain-list button:hover,
+    .domain-list button:focus {
+      border-color: var(--cyan);
+      color: white;
+      outline: 2px solid #1aaaff66;
+    }
+
+    footer {
+      color: #7fa8ce;
+      font-size: .8rem;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 760px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        position: static;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <h1>DAMA-DMBOK Data Management Wheel</h1>
+    <p class="intro">Hover or focus a wheel segment to explore it. Select a segment for its description.</p>
+    <div class="layout">
+      <div>
+        <div class="wheel" aria-label="Interactive DAMA-DMBOK wheel image map">
+          <img src="images/dmbok-wheel.webp"
+            alt="Blue neon DAMA-DMBOK wheel with Data Governance in the center and labeled data management domains">
+          <svg viewBox="0 0 1248 1248" aria-label="Interactive segment hotspots" role="group">
+            <path class="segment" tabindex="0" role="button" aria-label="Data Governance" data-name="Data Governance"
+              data-description="Policies, decision rights, stewardship, and accountability for data."
+              d="M 477.9,74.6 A 555,555 0 0 1 770.1,74.6 L 692.4,359.2 A 260,260 0 0 0 555.6,359.2 Z">
+              <title>Data Governance</title>
+            </path>
+            <path class="segment" tabindex="0" role="button" aria-label="Data Architecture"
+              data-name="Data Architecture"
+              data-description="The enterprise data structures, flows, and architectural blueprints."
+              d="M 790.6,80.6 A 555,555 0 0 1 1036.4,238.6 L 817.2,436.0 A 260,260 0 0 0 702.0,362.0 Z">
+              <title>Data Architecture</title>
+            </path>
+            <path class="segment" tabindex="0" role="button" aria-label="Data Modeling &amp; Design"
+              data-name="Data Modeling &amp; Design"
+              data-description="Conceptual, logical, and physical models that describe data."
+              d="M 1050.3,254.7 A 555,555 0 0 1 1171.7,520.5 L 880.6,568.1 A 260,260 0 0 0 823.7,443.5 Z">
+              <title>Data Modeling &amp; Design</title>
+            </path>
+            <path class="segment" tabindex="0" role="button" aria-label="Data Storage &amp; Operations"
+              data-name="Data Storage &amp; Operations"
+              data-description="Platforms, databases, integration, and operational data management."
+              d="M 1174.8,541.6 A 555,555 0 0 1 1133.2,830.8 L 862.5,713.4 A 260,260 0 0 0 882.0,577.9 Z">
+              <title>Data Storage &amp; Operations</title>
+            </path>
+            <path class="segment" tabindex="0" role="button" aria-label="Data Security" data-name="Data Security"
+              data-description="Protecting data through access control, privacy, and risk management."
+              d="M 1124.3,850.2 A 555,555 0 0 1 933.0,1071.0 L 768.7,826.0 A 260,260 0 0 0 858.4,722.5 Z">
+              <title>Data Security</title>
+            </path>
+            <path class="segment" tabindex="0" role="button" aria-label="Reference &amp; Master Data"
+              data-name="Reference &amp; Master Data"
+              data-description="Consistent, trusted definitions for key entities and reference values."
+              d="M 915.0,1082.6 A 555,555 0 0 1 634.7,1164.9 L 629.0,870.0 A 260,260 0 0 0 760.3,831.4 Z">
+              <title>Reference &amp; Master Data</title>
+            </path>
+            <path class="segment" tabindex="0" role="button" aria-label="Data Warehousing &amp; Business Intelligence"
+              data-name="Data Warehousing &amp; Business Intelligence"
+              data-description="Analytical data stores, reporting, and decision-support capabilities."
+              d="M 613.3,1164.9 A 555,555 0 0 1 333.0,1082.6 L 487.7,831.4 A 260,260 0 0 0 619.0,870.0 Z">
+              <title>Data Warehousing &amp; Business Intelligence</title>
+            </path>
+            <path class="segment" tabindex="0" role="button" aria-label="Data Quality" data-name="Data Quality"
+              data-description="Defining, measuring, monitoring, and improving fitness for use."
+              d="M 315.0,1071.0 A 555,555 0 0 1 123.7,850.2 L 389.6,722.5 A 260,260 0 0 0 479.3,826.0 Z">
+              <title>Data Quality</title>
+            </path>
+            <path class="segment" tabindex="0" role="button" aria-label="Document &amp; Content Management"
+              data-name="Document &amp; Content Management"
+              data-description="Managing documents, records, and unstructured information."
+              d="M 114.8,830.8 A 555,555 0 0 1 73.2,541.6 L 366.0,577.9 A 260,260 0 0 0 385.5,713.4 Z">
+              <title>Document &amp; Content Management</title>
+            </path>
+            <path class="segment" tabindex="0" role="button" aria-label="Metadata Management"
+              data-name="Metadata Management"
+              data-description="Managing data definitions, lineage, context, and technical metadata."
+              d="M 76.3,520.5 A 555,555 0 0 1 197.7,254.7 L 424.3,443.5 A 260,260 0 0 0 367.4,568.1 Z">
+              <title>Metadata Management</title>
+            </path>
+            <path class="segment" tabindex="0" role="button" aria-label="Data Lifecycle Management"
+              data-name="Data Lifecycle Management"
+              data-description="Managing data from creation and use through retention and disposal."
+              d="M 211.6,238.6 A 555,555 0 0 1 457.4,80.6 L 546.0,362.0 A 260,260 0 0 0 430.8,436.0 Z">
+              <title>Data Lifecycle Management</title>
+            </path>
+            <circle class="hub" cx="624" cy="610" r="248" tabindex="0" role="button" aria-label="Data Governance hub"
+              data-name="Data Governance — central hub"
+              data-description="The central discipline that establishes accountability, policies, standards, and decision rights across all data management areas.">
+              <title>Data Governance — central hub</title>
+            </circle>
+          </svg>
+        </div>
+        <div class="domain-list" aria-label="Choose a domain">
+          <button type="button" data-index="0">Data Governance</button><button type="button" data-index="1">Data
+            Architecture</button><button type="button" data-index="2">Data Modeling &amp; Design</button><button
+            type="button" data-index="3">Data Storage &amp; Operations</button><button type="button" data-index="4">Data
+            Security</button><button type="button" data-index="5">Reference &amp; Master Data</button><button
+            type="button" data-index="6">Data Warehousing &amp; Business Intelligence</button><button type="button"
+            data-index="7">Data Quality</button><button type="button" data-index="8">Document &amp; Content
+            Management</button><button type="button" data-index="9">Metadata Management</button><button type="button"
+            data-index="10">Data Lifecycle Management</button>
+        </div>
+      </div>
+      <aside aria-live="polite">
+        <div class="eyebrow">Selected knowledge area</div>
+        <h2 id="domain-title">Data Governance</h2>
+        <p id="domain-description">The central discipline that establishes accountability, policies, standards, and
+          decision rights across all data management areas.</p>
+        <p class="hint">Tip: You can also use Tab and Enter/Space to explore the wheel with a keyboard.</p>
+      </aside>
+    </div>
+    <footer>Interactive local HTML image map. Keep this HTML file and <code>dmbok-wheel-neon.png</code> in the same
+      folder.</footer>
+  </main>
+  <script>
+    (() => {
+      const title = document.getElementById('domain-title');
+      const description = document.getElementById('domain-description');
+      const hotspots = [...document.querySelectorAll('.segment, .hub')];
+      const buttons = [...document.querySelectorAll('.domain-list button')];
+      function show(el) {
+        title.textContent = el.dataset.name || 'Data Governance';
+        description.textContent = el.dataset.description || '';
+        hotspots.forEach(h => h.classList.toggle('active', h === el));
+      }
+      hotspots.forEach(el => {
+        el.addEventListener('mouseenter', () => show(el));
+        el.addEventListener('focus', () => show(el));
+        el.addEventListener('click', () => show(el));
+        el.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(el); }
+        });
+      });
+      buttons.forEach((button, i) => {
+        button.addEventListener('click', () => {
+          const hotspot = hotspots[i];
+          show(hotspot);
+          hotspot.focus({ preventScroll: true });
+        });
+      });
+    })();
+  </script>
+</body>
+
+</html>

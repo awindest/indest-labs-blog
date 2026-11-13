@@ -1,6 +1,6 @@
 ---
 title: What are AI Agents?
-description: An overview of what an ai agent is and some uses.
+description: An overview of what an AI agent is and some uses.
 slug: what-are-ai-agents
 published: '2026-10-08'
 category: AI

@@ -12,7 +12,6 @@
 
 	let { src, title, alt }: Props = $props()
 
-	// const images = dev ? imagesLocal : imagesUrl
 	const images = dev ? imagesLocal : imagesUrl
 	const slug = page.params.slug
 </script>

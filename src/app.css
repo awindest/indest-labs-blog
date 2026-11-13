@@ -172,7 +172,7 @@ dark- Names the variant. You use it with Tailwind classes such as dark:bg-gray-9
 }
 
 .dark {
-	--color-primary: hsl(240, 77%, 45%);
+	--color-primary: hsl(240, 7%, 43%);
 	--color-fg: hsl(220 10% 88%);
 	--color-base: hsl(220 20% 12%);
 
@@ -556,7 +556,7 @@ dark- Names the variant. You use it with Tailwind classes such as dark:bg-gray-9
 		h3 {
 			margin-bottom: var(--pad-base);
 			font-size: var(--text-prose-sub);
-			font-family: var(--font-serif);
+			font-family: var(--font-sans);
 			color: var(--color-primary);
 		}
 
