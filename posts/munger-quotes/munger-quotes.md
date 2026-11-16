@@ -4,6 +4,7 @@ description: Here are some nuggets of wisdom.
 slug: munger-quotes
 published: '2023-12-26'
 category: story
+draft: false
 ---
 - Being rational is a moral imperative. You should never be stupider than you need to be.
 - It takes character to sit there with all that cash and do nothing. I didn't get to where I am by going after mediocre opportunities.

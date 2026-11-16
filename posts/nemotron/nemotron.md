@@ -4,6 +4,7 @@ description: How to setup a great model with opencode.
 slug: nemotron
 published: '2026-10-2'
 category: AI
+draft: false
 ---
 
 <script lang="ts"> 

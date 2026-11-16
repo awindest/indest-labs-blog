@@ -3,7 +3,8 @@ title: A Story about PocketHost.io
 description: An interesting story about Ben Allfree, the person behind pockethost.io, a free pocketbase (as of today) cloud service.
 slug: pockethost-io
 published: '2023-12-10'
-category: svelte
+category: story
+draft: false
 ---
 <script lang="ts"> 
 import Embed from '#lib/components/embed.svelte' 

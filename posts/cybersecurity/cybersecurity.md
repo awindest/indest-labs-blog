@@ -3,7 +3,7 @@ title: CyberSecurity
 description: Exploring our options with AI.
 slug: cybersecurity
 published: '2026-12-13'
-category: governance
+category: cybersecurity
 ---
 <script lang="ts"> 
 import Embed from '#lib/components/embed.svelte' 

@@ -1,6 +1,6 @@
 export const siteName = 'Indest Labs Blog'
 export const siteUrl = 'https://indest-labs-blog.vercel.app/'
-export const siteTitle = 'Indest Labs - an evolving blog'
+export const title = 'Indest Labs - an evolving blog'
 export const siteDescription = 'Sundry collection of musings and thoughts from my life'
 export const siteImage = `${siteUrl}social.png`
 export const postImage = 'https://social-share-images.vercel.app/'
@@ -14,14 +14,14 @@ export const repository = 'https://github.com/awindest/indest-labs-blog'
 export const uses = 'https://sveltekit-markdown-blog-pearl.vercel.app/what-i-use'
 
 export const categories = {
-	javascript: 'JavaScript',
-	ai: 'ai',
+	ai: 'AI',
 	css: 'CSS',
-	general: 'General',
-	design: 'Design',
-	git: 'Git & GitHub',
-	docker: 'Docker',
 	data: 'Data',
+	docker: 'Docker',
+	design: 'Design',
+	general: 'General',
+	git: 'Git & GitHub',
+	javascript: 'JavaScript',
 	stories: 'Stories'
 }
 

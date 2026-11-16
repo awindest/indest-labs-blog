@@ -4,6 +4,7 @@ description: An interesting perspective on storytelling.
 slug: storytelling-rules
 published: '2026-11-10'
 category: stories
+draft: false
 ---
 <script lang="ts"> 
 import Embed from '#lib/components/embed.svelte' 
@@ -14,7 +15,7 @@ import YouTube from '#lib/components/youtube.svelte'
 
 Thanks to Ramon Chen's work for morphing Pixar's rules of story telling (Emma Coats) into a messaging framework for software products.
 
-#### Take a look at The Original Pixar’s 22 Rules of Storytelling. 
+### Take a look at The Original Pixar’s 22 Rules of Storytelling. 
 
 1. You admire a character for trying more than for their successes.
 1. You gotta keep in mind what’s interesting to you as an audience, not what’s fun to do as a writer. They can be very different.
@@ -39,12 +40,12 @@ Thanks to Ramon Chen's work for morphing Pixar's rules of story telling (Emma Co
 1. You gotta identify with your situation/characters, can’t just write ‘cool’. What would make YOU act that way?
 1. What’s the essence of your story? Most economical telling of it? If you know that, you can build out from there.
 
-#### Apply that to your messaging:
+### Apply that to your messaging:
 
 1. You admire THE RESULTING BENEFITS & VALUE OF YOUR PRODUCT more than for the FEATURES.
 1. You gotta keep in mind what’s interesting to THEM as a BUYER, not what’s fun to do as a MARKETER. They can be very different.
 1. Trying for TAGLINE is important, but you won’t see HOW YOUR PRODUCT TRULY DIFFERENTIATES til you’re at the end of YOUR VALIDATED MESSAGING PROCESS. Now rewrite.
-1. Use this as the Elevator framework for you and your buyer: Once upon a time there was A <insert department specific> ORGANIZATION WITHIN A <insert industry if appropriate> COMPANY. Every day, THEY STRUGGLED WITH A COMPETITIVE MARKETPLACE, COMPLEX CUSTOMERS, AND INCREASINGLY STRINGENT REGULATIONS. One day THEY DISCOVERED <your product or platform>. Because of that, THEY WERE ABLE TO EXECUTE BETTER THROUGH <insert your best resulting actions>. Because of that, THEIR IT TEAMS <or whomever your buyer is> WERE CELEBRATED FOR <business value prop>, THEIR BUSINESS TEAMS WERE COMMENDED FOR INCREASED PRODUCTIVITY AND EFFECTIVENESS … ALL WHILE STAYING COMPLIANT. Until finally THEY DEMONSTRATED SUCH COMPELLING BUSINESS VALUE THAT THE REST OF THE COMPANY JOINED THEM AND ALSO BEGAN USING <insert your product or platform>
+1. Use this as the Elevator framework for you and your buyer: Once upon a time there was A **insert department specific** ORGANIZATION WITHIN A **insert industry if appropriate** COMPANY. Every day, THEY STRUGGLED WITH A COMPETITIVE MARKETPLACE, COMPLEX CUSTOMERS, AND INCREASINGLY STRINGENT REGULATIONS. One day THEY DISCOVERED **your product or platform**. Because of that, THEY WERE ABLE TO EXECUTE BETTER THROUGH **insert your best resulting actions**. Because of that, THEIR IT TEAMS **or whomever your buyer is** WERE CELEBRATED FOR **business value prop**, THEIR BUSINESS TEAMS WERE COMMENDED FOR INCREASED PRODUCTIVITY AND EFFECTIVENESS … ALL WHILE STAYING COMPLIANT. Until finally THEY DEMONSTRATED SUCH COMPELLING BUSINESS VALUE THAT THE REST OF THE COMPANY JOINED THEM AND ALSO BEGAN USING **insert your product or platform**
 1. Simplify. Focus. Combine AND GROUP MESSAGES. Hop over detours. You’ll feel like you’re losing valuable stuff but it sets you free.
 1. What is your PRODUCT good at, comfortable with? Throw the polar opposite at them. Challenge them. How do they deal? IF THEY DON’T DEAL WELL ON PAPER, DON’T PUT YOUR SALES TEAMS INTO NON-WINNABLE SITUATIONS BY INCLUDING THOSE USE CASES JUST TO INCREASE MARKET OPPORTUNITY
 1. Come up with your ending before you figure out your middle. Seriously. Endings are hard, get yours working up front. CAN YOU DISTILL YOUR CORE PRODUCT MESSAGE DOWN TO THREE KEYWORDS OR LESS?

@@ -74,7 +74,6 @@
 </svelte:head>
 
 <!-- <main class="flex min-h-screen w-full items-center justify-center"> -->
-<!-- <main class="mx-auto w-full max-w-shell px-4"> -->
 <main class="mx-auto w-full max-w-shell px-4 py-8">
 	<section>
 		<ul class="posts">
@@ -111,7 +110,6 @@
 		</ul>
 
 		{#if hasMore}
-			<!-- <div class="load-more flex justify-center py-8"> -->
 			<div class="load-more">
 				<button onclick={loadMore} class="load-more-btn"> Load More Posts </button>
 			</div>

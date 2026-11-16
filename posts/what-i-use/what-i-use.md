@@ -4,9 +4,8 @@ description: Here are the technologies that I use to create my web presence.
 slug: what-i-use
 published: '2023-12-3'
 category: web
+draft: false
 ---
-
-
 
 ## Some technologies that I use today:
 

@@ -4,6 +4,7 @@ description:
 slug: dream-homelab
 published: '2026-12-10'
 category: webdev
+draft: false
 ---
 <script lang="ts"> 
 import Embed from '#lib/components/embed.svelte' 
@@ -26,7 +27,7 @@ It is a playground for doing nerdy, technical stuff safely so you don't shoot yo
 I learned about homelabs from this [youtube video](https://www.youtube.com/watch?v=kq0U1H5nLC8).
 
 
-# 10-inch Homelab Shopping List
+## 10-inch Homelab Shopping List
 
 **Concept:** a compact 10-inch homelab built around an Apple Mac Studio, a Raspberry Pi 5, multi-gigabit networking, and NAS storage. The pink/purple reference rack in the above photo is a 3-d printed rack from [KWS Labs](https://kwslabs.com/racks/). See [MakerWorld](https://makerworld.com/en/models/2139130-kws-rack-v-2-heavy-duty-10-inch-homelab-rack#profileId-2317125).
 
@@ -86,12 +87,12 @@ We also want fast NAS transfers so we choose a switch with 10GbE uplinks or a 10
 - **NAS enclosure planning allowance:** approximately $600–$800, depending on model and condition.
 - **Drives:** start with 4 × 8TB NAS-rated drives in a mirror if you want redundancy; add drives later as capacity needs grow. Drive costs are additional and fluctuate substantially especially with current memory/chip shortages.
 - **Role:** shared datasets, project files, backups, media, and container/application storage.
-- **Example product information:** [Synology DiskStatoin DS425+ spec overview](https://www.synology.com/en-global/products/DS425+)
+- **Example product information:** [Synology DiskStation DS425+ spec overview](https://www.synology.com/en-global/products/DS425+).
 Here is a [review](https://nascompares.com/review/synology-ds425-nas-review-should-you-buy/)
 
 A RAID mirror is not a backup by itself. Keep a separate backup copy, ideally including an off-site or cloud copy for irreplaceable data. 
 
->**Remember the 3-2-1 backup rule:**  3 Total Copies: Keep three total copies of your data (1 original working copy and 2 separate backups); 2 Different Media: Store these copies on two different types of media or storage devices (for example, your computer/workstation plus a Synology NAS or external hard drive);1 Off-Site Copy: Keep at least one backup copy off-site (such as in the cloud - AWS S3 Glacier - or at a remote location/secondary NAS)
+>**Remember the 3-2-1 backup rule:**  **3 Total Copies:** Keep three total copies of your data (1 original working copy and 2 separate backups); **2 Different Media:** Store these copies on two different types of media or storage devices (for example, your computer/workstation plus a Synology NAS or external hard drive); **1 Off-Site Copy:** Keep at least one backup copy off-site (such as in the cloud - AWS S3 Glacier - or at a remote location/secondary NAS)
 
 ## Power and cooling
 

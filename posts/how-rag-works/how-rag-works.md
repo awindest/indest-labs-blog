@@ -4,6 +4,7 @@ description: An overview of the process flow of Retrieval-Augmented Generation.
 slug: how-rag-works
 published: '2026-10-1'
 category: AI
+draft: false
 ---
 
 <script lang="ts"> 

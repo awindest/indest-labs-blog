@@ -4,6 +4,7 @@ description: How to install NemoClaw on a Mac and get OpenClaw
 slug: nemoclaw
 published: '2026-11-15'
 category: AI
+draft: false
 ---
 
 <script lang="ts"> 

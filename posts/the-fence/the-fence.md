@@ -3,7 +3,8 @@ title: The Fence
 description: A tale about managing anger with a hammer.
 slug: the-fence
 published: '1999-8-5'
-categories: svelte
+category: story
+draft: false
 ---
 
 There once was a little boy, who had a bad temper. His father handed him a bag of nails and a hammer, and told him that every time he lost his temper, he must hammer a nail into the back fence. The first day the boy had driven 37 nails into the fence. Over the next few weeks, as he learned to control his anger, the number of nails hammered daily gradually dwindled down. He discovered it was easier to hold his temper than to drive those nails into the fence...
