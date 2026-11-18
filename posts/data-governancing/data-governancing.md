@@ -2,22 +2,18 @@
 title: The Data Governance Story
 description: An interesting explanation of modern governance.
 slug: data-governancing
-published: '11-15-2026'
+published: '2026-11-26'
 category: governance
 ---
 <script lang="ts"> 
 import Embed from '#lib/components/embed.svelte' 
 import Image from '#lib/components/image.svelte' 
 import YouTube from '#lib/components/youtube.svelte' 
-// import Wheel from './dmbok-wheel.svelte' 
 </script>
 
 ## DAMA-DMBOK Data Management Wheel
-	<!-- <p class="intro"> -->
     
 ### Hover over, tap, or keyboard-focus a segment to see what it covers.
-
-<!-- <Wheel></Wheel> -->
 
 ## Table of Contents
 

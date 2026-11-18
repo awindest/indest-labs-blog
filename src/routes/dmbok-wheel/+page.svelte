@@ -1,272 +1,309 @@
+<!-- dmbok-wheel.svelte -->
+
 <script lang="ts">
-	import { onMount } from 'svelte'
-	onMount(() => {
-		const stage = document.getElementById('stage')
-		const svg = stage.querySelector('svg')
-		const tip = document.getElementById('tip')
-		const tipTitle = document.getElementById('tip-title')
-		const tipDesc = document.getElementById('tip-desc')
-		const hotspots = [...svg.querySelectorAll('.hotspot')]
-		const VB = 1254 // SVG viewBox size
-		let current = null
-		let hovering = false // mouse is over a hotspot
-		console.log('running onMount script')
-		function fill(el: HTMLElement) {
-			tipTitle.textContent = el.dataset.name
-			tipDesc.textContent = el.dataset.description
-			hotspots.forEach((h) => h.classList.toggle('active', h === el))
-			current = el
-			tip.classList.add('show')
+	import { tick } from 'svelte'
+	import Image from '#lib/components/image.svelte'
+
+	const VB = 1254 // SVG viewBox size
+
+	type Hotspot = {
+		name: string
+		description: string
+		x: number
+		y: number
+		shape: 'circle' | 'path'
+		geometry: Record<string, string | number>
+	}
+
+	// The data that used to live in data-* attributes
+	const hotspots: Hotspot[] = [
+		{
+			name: 'Data Governance',
+			description:
+				'The central discipline that establishes accountability, policies, standards, and decision rights across all data management areas.',
+			x: 622,
+			y: 614,
+			shape: 'circle',
+			geometry: { cx: 622, cy: 614, r: 234 }
+		},
+		{
+			name: 'Data Architecture',
+			description: 'The enterprise data structures, flows, and architectural blueprints.',
+			x: 624,
+			y: 214,
+			shape: 'path',
+			geometry: {
+				d: 'M 465.7,99.1 A 540,540 0 0 1 790.7,103.0 L 697.8,365.3 A 260,260 0 0 0 544.1,365.9 Z'
+			}
+		},
+		{
+			name: 'Data Modeling & Design',
+			description: 'Conceptual, logical, and physical models that describe data.',
+			x: 862,
+			y: 294,
+			shape: 'path',
+			geometry: {
+				d: 'M 800.2,106.2 A 540,540 0 0 1 1064.9,307.0 L 832.2,461.0 A 260,260 0 0 0 707.3,368.4 Z'
+			}
+		},
+		{
+			name: 'Data Storage & Operations',
+			description: 'Platforms, databases, integration, and operational data management.',
+			x: 1004,
+			y: 494,
+			shape: 'path',
+			geometry: {
+				d: 'M 1070.5,315.3 A 540,540 0 0 1 1161.7,598.3 L 882.0,612.3 A 260,260 0 0 0 838.0,469.2 Z'
+			}
+		},
+		{
+			name: 'Data Security',
+			description: 'Protecting data through access control, privacy, and risk management.',
+			x: 1005,
+			y: 730,
+			shape: 'path',
+			geometry: {
+				d: 'M 1161.9,608.3 A 540,540 0 0 1 1067.4,921.4 L 842.1,752.4 A 260,260 0 0 0 881.9,622.3 Z'
+			}
+		},
+		{
+			name: 'Reference & Master Data',
+			description: 'Consistent, trusted definitions for key entities and reference values.',
+			x: 876,
+			y: 923,
+			shape: 'path',
+			geometry: {
+				d: 'M 1061.6,929.6 A 540,540 0 0 1 836.1,1111.7 L 727.1,851.8 A 260,260 0 0 0 836.6,760.8 Z'
+			}
+		},
+		{
+			name: 'Data Warehousing & Business Intelligence',
+			description: 'Analytical data stores, reporting, and decision-support capabilities.',
+			x: 628,
+			y: 1014,
+			shape: 'path',
+			geometry: {
+				d: 'M 826.9,1115.6 A 540,540 0 0 1 414.6,1114.6 L 540.9,861.0 A 260,260 0 0 0 717.9,855.7 Z'
+			}
+		},
+		{
+			name: 'Data Quality',
+			description: 'Defining, measuring, monitoring, and improving fitness for use.',
+			x: 377,
+			y: 930,
+			shape: 'path',
+			geometry: {
+				d: 'M 405.4,1110.6 A 540,540 0 0 1 184.0,931.9 L 415.2,771.5 A 260,260 0 0 0 531.4,857.7 Z'
+			}
+		},
+		{
+			name: 'Document & Content Management',
+			description: 'Managing documents, records, and unstructured information.',
+			x: 241,
+			y: 736,
+			shape: 'path',
+			geometry: {
+				d: 'M 178.3,923.7 A 540,540 0 0 1 82.0,610.9 L 362.1,621.9 A 260,260 0 0 0 409.3,763.5 Z'
+			}
+		},
+		{
+			name: 'Metadata Management',
+			description: 'Managing data definitions, lineage, context, and technical metadata.',
+			x: 240,
+			y: 494,
+			shape: 'path',
+			geometry: {
+				d: 'M 82.2,600.9 A 540,540 0 0 1 181.3,303.9 L 402.3,475.0 A 260,260 0 0 0 362.0,611.9 Z'
+			}
+		},
+		{
+			name: 'Data Lifecycle Management',
+			description: 'Managing data from creation and use through retention and disposal.',
+			x: 383,
+			y: 293,
+			shape: 'path',
+			geometry: {
+				d: 'M 187.2,295.8 A 540,540 0 0 1 456.1,102.1 L 534.6,369.1 A 260,260 0 0 0 407.8,466.6 Z'
+			}
 		}
+	]
 
-		function hide() {
-			current = null
-			hovering = false
-			hotspots.forEach((h) => h.classList.remove('active'))
-			tip.classList.remove('show')
+	// DOM refs (only needed for measuring)
+	let stage: HTMLDivElement
+	let svg: SVGSVGElement
+	let tip: HTMLDivElement
+
+	// Reactive state: the template derives every class and the popup content from these
+	let activeIndex = $state<number | null>(null)
+	let shown = $state<Hotspot | null>(null) // last-shown content, so text doesn't vanish mid fade-out
+	let tipPos = $state({ x: 0, y: 0 })
+
+	// Plain flag: not rendered anywhere, so it doesn't need to be reactive
+	let hovering = false
+
+	function open(i: number) {
+		activeIndex = i
+		shown = hotspots[i]
+	}
+
+	function hide() {
+		activeIndex = null
+		hovering = false
+	}
+
+	// Keep the popup inside the stage
+	function place(x: number, y: number, below: boolean) {
+		const sw = stage.clientWidth,
+			sh = stage.clientHeight
+		const tw = tip.offsetWidth,
+			th = tip.offsetHeight
+		let left = x - tw / 2
+		let top = below ? y + 18 : y - th - 18
+		left = Math.max(4, Math.min(sw - tw - 4, left))
+		top = Math.max(4, Math.min(sh - th - 4, top))
+		tipPos = { x: left, y: top }
+	}
+
+	// Anchor the popup to a segment (touch and keyboard focus)
+	function anchor(i: number) {
+		const r = svg.getBoundingClientRect(),
+			s = stage.getBoundingClientRect()
+		const k = r.width / VB
+		const x = r.left - s.left + hotspots[i].x * k
+		const y = r.top - s.top + hotspots[i].y * k
+		place(x, y, y < stage.clientHeight / 2)
+	}
+
+	// Follow the mouse pointer
+	function follow(e: PointerEvent) {
+		const s = stage.getBoundingClientRect()
+		const x = e.clientX - s.left,
+			y = e.clientY - s.top
+		const tw = tip.offsetWidth,
+			th = tip.offsetHeight
+		let left = x + 16,
+			top = y + 20
+		if (left + tw > stage.clientWidth - 4) left = x - tw - 16
+		if (top + th > stage.clientHeight - 4) top = y - th - 16
+		left = Math.max(4, left)
+		top = Math.max(4, top)
+		tipPos = { x: left, y: top }
+	}
+
+	// State changes reach the DOM asynchronously, so wait a tick before measuring the popup
+	async function openAndAnchor(i: number) {
+		open(i)
+		await tick()
+		anchor(i)
+	}
+
+	async function onPointerEnter(e: PointerEvent, i: number) {
+		if (e.pointerType !== 'mouse') return
+		hovering = true
+		open(i)
+		await tick()
+		follow(e)
+	}
+
+	function onPointerMove(e: PointerEvent, i: number) {
+		if (e.pointerType === 'mouse' && activeIndex === i) follow(e)
+	}
+
+	function onPointerLeave(e: PointerEvent) {
+		if (e.pointerType === 'mouse') hide()
+	}
+
+	// Touch / pen: tap a segment to open its popup
+	function onPointerDown(e: PointerEvent, i: number) {
+		if (e.pointerType === 'mouse') return
+		openAndAnchor(i)
+	}
+
+	function onFocus(i: number) {
+		if (hovering) return
+		openAndAnchor(i)
+	}
+
+	function onBlur() {
+		if (!hovering) hide()
+	}
+
+	function onKeyDown(e: KeyboardEvent, i: number) {
+		if (e.key === 'Enter' || e.key === ' ') {
+			e.preventDefault()
+			openAndAnchor(i)
 		}
-
-		// Keep the popup inside the stage
-		function place(x, y, below) {
-			const sw = stage.clientWidth,
-				sh = stage.clientHeight
-			const tw = tip.offsetWidth,
-				th = tip.offsetHeight
-			let left = x - tw / 2
-			let top = below ? y + 18 : y - th - 18
-			left = Math.max(4, Math.min(sw - tw - 4, left))
-			top = Math.max(4, Math.min(sh - th - 4, top))
-			tip.style.transform = `translate(${left}px, ${top}px)`
+		if (e.key === 'Escape') {
+			hide()
+			;(e.currentTarget as SVGElement).blur()
 		}
+	}
 
-		// Anchor the popup to a segment (used for touch and keyboard focus)
-		function anchor(el) {
-			const r = svg.getBoundingClientRect(),
-				s = stage.getBoundingClientRect()
-			const k = r.width / VB
-			const x = r.left - s.left + parseFloat(el.dataset.x) * k
-			const y = r.top - s.top + parseFloat(el.dataset.y) * k
-			place(x, y, y < stage.clientHeight / 2)
-		}
+	// Tap anywhere outside the wheel hotspots to dismiss
+	function onDocumentPointerDown(e: PointerEvent) {
+		if (!(e.target as Element).closest?.('.hotspot')) hide()
+	}
 
-		// Follow the mouse pointer
-		function follow(e) {
-			const s = stage.getBoundingClientRect()
-			const x = e.clientX - s.left,
-				y = e.clientY - s.top
-			const tw = tip.offsetWidth,
-				th = tip.offsetHeight
-			let left = x + 16,
-				top = y + 20
-			if (left + tw > stage.clientWidth - 4) left = x - tw - 16
-			if (top + th > stage.clientHeight - 4) top = y - th - 16
-			left = Math.max(4, left)
-			top = Math.max(4, top)
-			tip.style.transform = `translate(${left}px, ${top}px)`
-		}
-
-		hotspots.forEach((el) => {
-			el.addEventListener('pointerenter', (e) => {
-				if (e.pointerType !== 'mouse') return
-				hovering = true
-				fill(el)
-				follow(e)
-			})
-			el.addEventListener('pointermove', (e) => {
-				if (e.pointerType === 'mouse' && current === el) follow(e)
-			})
-			el.addEventListener('pointerleave', (e) => {
-				if (e.pointerType === 'mouse') hide()
-			})
-			// Touch / pen: tap a segment to open its popup
-			el.addEventListener('pointerdown', (e) => {
-				if (e.pointerType === 'mouse') return
-				fill(el)
-				anchor(el)
-			})
-			// Keyboard focus (Tab) and Enter/Space
-			el.addEventListener('focus', () => {
-				if (hovering) return
-				fill(el)
-				anchor(el)
-			})
-			el.addEventListener('blur', () => {
-				if (!hovering) hide()
-			})
-			el.addEventListener('keydown', (e) => {
-				if (e.key === 'Enter' || e.key === ' ') {
-					e.preventDefault()
-					fill(el)
-					anchor(el)
-				}
-				if (e.key === 'Escape') {
-					hide()
-					el.blur()
-				}
-			})
-		})
-
-		// Tap anywhere outside the wheel hotspots to dismiss
-		document.addEventListener('pointerdown', (e) => {
-			if (!e.target.closest || !e.target.closest('.hotspot')) hide()
-		})
-		window.addEventListener('resize', () => {
-			if (current && !hovering) anchor(current)
-		})
-	})
+	function onResize() {
+		if (activeIndex !== null && !hovering) anchor(activeIndex)
+	}
 </script>
 
-<svelte:head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>DAMA-DMBOK Wheel — Interactive Image Map &copy; 2024 DAMA International</title>
-</svelte:head>
+<!-- Replaces document/window addEventListener in onMount; Svelte cleans these up automatically -->
+<svelte:document onpointerdown={onDocumentPointerDown} />
+<svelte:window onresize={onResize} />
 
-<main>
-	<h1>DAMA-DMBOK Data Management Wheel</h1>
-	<p class="intro">Hover over, tap, or keyboard-focus a segment to see what it covers.</p>
+<h1>DAMA-DMBOK Data Management Wheel</h1>
+<p class="intro">
+	Hover over, tap, or keyboard-focus a segment to see what it covers. &copy; 2024 DAMA International
+</p>
 
-	<div class="stage" id="stage">
-		<div class="wheel">
-			<img
-				src="assets/dmbok-wheel.webp"
-				alt="Blue neon DAMA-DMBOK wheel with Data Governance in the center and labeled data management domains"
-			/>
-			<svg viewBox="0 0 1254 1254" aria-label="Interactive segment hotspots" role="group">
-				<circle
-					class="hotspot"
-					cx="622"
-					cy="614"
-					r="234"
-					tabindex="0"
-					role="button"
-					aria-label="Data Governance"
-					data-name="Data Governance"
-					data-x="622"
-					data-y="614"
-					data-description="The central discipline that establishes accountability, policies, standards, and decision rights across all data management areas."
-				/>
-				<path
-					class="hotspot"
-					tabindex="0"
-					role="button"
-					aria-label="Data Architecture"
-					data-name="Data Architecture"
-					data-x="624"
-					data-y="214"
-					data-description="The enterprise data structures, flows, and architectural blueprints."
-					d="M 465.7,99.1 A 540,540 0 0 1 790.7,103.0 L 697.8,365.3 A 260,260 0 0 0 544.1,365.9 Z"
-				/>
-				<path
-					class="hotspot"
-					tabindex="0"
-					role="button"
-					aria-label="Data Modeling &amp; Design"
-					data-name="Data Modeling &amp; Design"
-					data-x="862"
-					data-y="294"
-					data-description="Conceptual, logical, and physical models that describe data."
-					d="M 800.2,106.2 A 540,540 0 0 1 1064.9,307.0 L 832.2,461.0 A 260,260 0 0 0 707.3,368.4 Z"
-				/>
-				<path
-					class="hotspot"
-					tabindex="0"
-					role="button"
-					aria-label="Data Storage &amp; Operations"
-					data-name="Data Storage &amp; Operations"
-					data-x="1004"
-					data-y="494"
-					data-description="Platforms, databases, integration, and operational data management."
-					d="M 1070.5,315.3 A 540,540 0 0 1 1161.7,598.3 L 882.0,612.3 A 260,260 0 0 0 838.0,469.2 Z"
-				/>
-				<path
-					class="hotspot"
-					tabindex="0"
-					role="button"
-					aria-label="Data Security"
-					data-name="Data Security"
-					data-x="1005"
-					data-y="730"
-					data-description="Protecting data through access control, privacy, and risk management."
-					d="M 1161.9,608.3 A 540,540 0 0 1 1067.4,921.4 L 842.1,752.4 A 260,260 0 0 0 881.9,622.3 Z"
-				/>
-				<path
-					class="hotspot"
-					tabindex="0"
-					role="button"
-					aria-label="Reference &amp; Master Data"
-					data-name="Reference &amp; Master Data"
-					data-x="876"
-					data-y="923"
-					data-description="Consistent, trusted definitions for key entities and reference values."
-					d="M 1061.6,929.6 A 540,540 0 0 1 836.1,1111.7 L 727.1,851.8 A 260,260 0 0 0 836.6,760.8 Z"
-				/>
-				<path
-					class="hotspot"
-					tabindex="0"
-					role="button"
-					aria-label="Data Warehousing &amp; Business Intelligence"
-					data-name="Data Warehousing &amp; Business Intelligence"
-					data-x="628"
-					data-y="1014"
-					data-description="Analytical data stores, reporting, and decision-support capabilities."
-					d="M 826.9,1115.6 A 540,540 0 0 1 414.6,1114.6 L 540.9,861.0 A 260,260 0 0 0 717.9,855.7 Z"
-				/>
-				<path
-					class="hotspot"
-					tabindex="0"
-					role="button"
-					aria-label="Data Quality"
-					data-name="Data Quality"
-					data-x="377"
-					data-y="930"
-					data-description="Defining, measuring, monitoring, and improving fitness for use."
-					d="M 405.4,1110.6 A 540,540 0 0 1 184.0,931.9 L 415.2,771.5 A 260,260 0 0 0 531.4,857.7 Z"
-				/>
-				<path
-					class="hotspot"
-					tabindex="0"
-					role="button"
-					aria-label="Document &amp; Content Management"
-					data-name="Document &amp; Content Management"
-					data-x="241"
-					data-y="736"
-					data-description="Managing documents, records, and unstructured information."
-					d="M 178.3,923.7 A 540,540 0 0 1 82.0,610.9 L 362.1,621.9 A 260,260 0 0 0 409.3,763.5 Z"
-				/>
-				<path
-					class="hotspot"
-					tabindex="0"
-					role="button"
-					aria-label="Metadata Management"
-					data-name="Metadata Management"
-					data-x="240"
-					data-y="494"
-					data-description="Managing data definitions, lineage, context, and technical metadata."
-					d="M 82.2,600.9 A 540,540 0 0 1 181.3,303.9 L 402.3,475.0 A 260,260 0 0 0 362.0,611.9 Z"
-				/>
-				<path
-					class="hotspot"
-					tabindex="0"
-					role="button"
-					aria-label="Data Lifecycle Management"
-					data-name="Data Lifecycle Management"
-					data-x="383"
-					data-y="293"
-					data-description="Managing data from creation and use through retention and disposal."
-					d="M 187.2,295.8 A 540,540 0 0 1 456.1,102.1 L 534.6,369.1 A 260,260 0 0 0 407.8,466.6 Z"
-				/>
-			</svg>
-		</div>
+<div class="stage" bind:this={stage}>
+	<div class="wheel">
+		<img
+			src="assets/dmbok-wheel.webp"
+			alt="Blue neon DAMA-DMBOK wheel with Data Governance in the center and labeled data management domains"
+		/>
 
-		<div class="tip" id="tip" role="tooltip" aria-live="polite">
-			<h2 id="tip-title"></h2>
-			<p id="tip-desc"></p>
-		</div>
+		<svg
+			bind:this={svg}
+			viewBox="0 0 1254 1254"
+			aria-label="Interactive segment hotspots"
+			role="group"
+		>
+			{#each hotspots as h, i (h.name)}
+				<svelte:element
+					this={h.shape}
+					{...h.geometry}
+					class="hotspot"
+					class:active={activeIndex === i}
+					tabindex="0"
+					role="button"
+					aria-label={h.name}
+					onpointerenter={(e: PointerEvent) => onPointerEnter(e, i)}
+					onpointermove={(e: PointerEvent) => onPointerMove(e, i)}
+					onpointerleave={onPointerLeave}
+					onpointerdown={(e: PointerEvent) => onPointerDown(e, i)}
+					onfocus={() => onFocus(i)}
+					onblur={onBlur}
+					onkeydown={(e: KeyboardEvent) => onKeyDown(e, i)}
+				/>
+			{/each}
+		</svg>
 	</div>
 
-	<footer>Copyright &copy; 2024 DAMA International</footer>
-</main>
+	<div
+		class="tip"
+		class:show={activeIndex !== null}
+		style:transform="translate({tipPos.x}px, {tipPos.y}px)"
+		bind:this={tip}
+		role="tooltip"
+		aria-live="polite"
+	>
+		<h2>{shown?.name}</h2>
+		<p>{shown?.description}</p>
+	</div>
+</div>
 
 <style>
 	:root {
@@ -293,28 +330,29 @@
 		background: radial-gradient(ellipse at 50% 35%, #092c67 0%, #04132f 50%, #020713 100%);
 	}
 
-	main {
-		max-width: 860px;
-		margin: 0 auto;
-	}
-
 	h1 {
 		margin: 0 0 6px;
 		font-size: clamp(1.4rem, 3vw, 2.2rem);
 		letter-spacing: 0.02em;
+		text-align: center;
 	}
 
 	.intro {
 		margin: 0 0 22px;
 		color: #a9d7ff;
+		text-align: center;
 	}
 
 	/* Positioning context for the wheel and its popup (popup must not be clipped by the wheel) */
-	.stage {
-		position: relative;
-		width: 100%;
-	}
 
+	.stage {
+		--pad: 16px;
+		--chrome: 0px;
+		position: relative;
+		width: min(100% - 2 * var(--pad), 100vh - var(--chrome) - 2 * var(--pad));
+		width: min(100% - 2 * var(--pad), 100dvh - var(--chrome) - 2 * var(--pad));
+		margin: var(--pad) auto;
+	}
 	.wheel {
 		position: relative;
 		width: 100%;
